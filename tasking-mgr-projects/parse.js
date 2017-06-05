@@ -94,23 +94,17 @@ var fetchTaskData = function(prjIndex, cb) {
         var thisState = tile.properties.state;
         // 2 is done and 3 is validated
         // https://github.com/hotosm/osm-tasking-manager2/wiki/API#list-of-tasks-with-state-and-lock-status
-        if(thisState === 2 || thisState === 3) {
-          var tileProp = {
+        var tileProp = {
             "task": thisPrj["task_number"],
             "created": thisPrj["created"],
             "state": thisState
-          };
-          tasksFc.features.push(turf.feature(tile.geometry, tileProp));
+        };
+        tasksFc.features.push(turf.feature(tile.geometry, tileProp));
         }
 
       }
       console.log("processed tasks for #" + thisPrj["task_number"]);
       cb();
-    } else {
-      console.log("failed getting tasks json for #" + thisPrj["task_number"])
-      console.log("error      :  " + error )
-      cb();
-    }
   });
 }
 
